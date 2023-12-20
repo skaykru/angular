@@ -1,0 +1,16 @@
+<button
+  class="btn btn-outline-primary btn-sm"
+  [class.active]="article.favorited"
+  [class.disabled]="loading"
+  (click)="toggleFavorited()"
+>
+  <span *ngIf="isInFeed">
+    <i class="ion-heart"></i> {{ article.favoritesCount }}
+  </span>
+  <span *ngIf="!isInFeed">
+    <i class="ion-heart"></i>&nbsp;
+    <span *ngIf="!article.favorited">Favorite</span>
+    <span *ngIf="article.favorited">Unfavorite</span>
+    Article ({{ article.favoritesCount }})
+  </span>
+</button>

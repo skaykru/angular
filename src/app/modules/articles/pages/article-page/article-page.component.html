@@ -1,0 +1,123 @@
+<div class="article-page" *ngIf="article">
+  <div class="banner">
+    <div class="container">
+      <h1>{{ article.title }}</h1>
+
+      <div class="article-meta">
+        <a [routerLink]="'/profile/' + article.author.username">
+          <img src="{{ article.author.image }}" />
+        </a>
+        <div class="info">
+          <a
+            [routerLink]="'/profile/' + article.author.username"
+            class="author"
+          >
+            {{ article.author.username }}
+          </a>
+          <span class="date">
+            {{ article.createdAt | date: "MMMM dd, yyyy" }}
+          </span>
+        </div>
+
+        <ng-template
+          [ngIf]="authServ.currentUser?.username !== article.author.username"
+        >
+          <app-follow-button [profile]="article.author"></app-follow-button>
+          &nbsp;
+          <app-favorite-button
+            [article]="article"
+            [is-in-feed]="false"
+          ></app-favorite-button>
+        </ng-template>
+
+        <ng-template
+          [ngIf]="authServ.currentUser?.username === article.author.username"
+        >
+          <a
+            class="btn btn-outline-secondary btn-sm"
+            [routerLink]="'/editor/' + article.slug"
+          >
+            <span><i class="ion-edit"></i> Edit Article</span>
+          </a>
+          &nbsp;
+          <app-delete-article-button
+            [article]="article"
+          ></app-delete-article-button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="container page">
+    <div class="row article-content">
+      <div class="col-md-12">
+        <p>
+          {{ article.body }}
+        </p>
+        <ul class="tag-list">
+          <li
+            class="tag-default tag-pill tag-outline"
+            *ngFor="let tag of article.tagList"
+          >
+            {{ tag }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="article-actions">
+      <div class="article-meta">
+        <a [routerLink]="'/profile/' + article.author.username">
+          <img src="{{ article.author.image }}" />
+        </a>
+        <div class="info">
+          <a
+            [routerLink]="'/profile/' + article.author.username"
+            class="author"
+          >
+            {{ article.author.username }}
+          </a>
+          <span class="date">
+            {{ article.createdAt | date: "MMMM dd, yyyy" }}
+          </span>
+        </div>
+
+        <ng-template
+          [ngIf]="authServ.currentUser?.username !== article.author.username"
+        >
+          <app-follow-button [profile]="article.author"></app-follow-button>
+          &nbsp;
+          <app-favorite-button
+            [article]="article"
+            [is-in-feed]="false"
+          ></app-favorite-button>
+        </ng-template>
+
+        <ng-template
+          [ngIf]="authServ.currentUser?.username === article.author.username"
+        >
+          <a
+            class="btn btn-outline-secondary btn-sm"
+            [routerLink]="'/editor/' + article.slug"
+          >
+            <span><i class="ion-edit"></i> Edit Article</span>
+          </a>
+          &nbsp;
+          <app-delete-article-button
+            [article]="article"
+          ></app-delete-article-button>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+        <app-comment-form [article]="article"></app-comment-form>
+
+        <app-comments [article]="article"></app-comments>
+      </div>
+    </div>
+  </div>
+</div>

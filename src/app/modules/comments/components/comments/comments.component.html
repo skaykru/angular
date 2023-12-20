@@ -1,0 +1,31 @@
+<div class="card" *ngFor="let comment of comments.reverse()">
+  <div class="card-block">
+    <p class="card-text">
+      {{ comment.body }}
+    </p>
+  </div>
+  <div class="card-footer">
+    <a
+      [routerLink]="'/profile/' + comment.author.username"
+      class="comment-author"
+    >
+      <img src="{{ comment.author.image }}" class="comment-author-img" />
+    </a>
+    &nbsp;
+    <a
+      [routerLink]="'/profile/' + comment.author.username"
+      class="comment-author"
+    >
+      {{ comment.author.username }}
+    </a>
+    <span class="date-posted">
+      {{ comment.createdAt | date: "MMMM dd, yyyy" }}
+    </span>
+    <span
+      class="mod-options"
+      *ngIf="authServ.currentUser?.username === comment.author.username"
+    >
+      <i class="ion-trash-a" (click)="deleteCommentHandler(comment)"></i>
+    </span>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<header *ngIf="!loadingCurrentUser">
+  <app-navigation></app-navigation>
+</header>
+
+<main *ngIf="!loadingCurrentUser">
+  <router-outlet></router-outlet>
+</main>
+
+<app-footer></app-footer>

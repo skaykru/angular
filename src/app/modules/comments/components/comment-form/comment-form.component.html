@@ -1,0 +1,26 @@
+<form
+  class="card comment-form"
+  [formGroup]="commentForm"
+  (submit)="commentFormSubmit()"
+  *ngIf="authServ.isAuthenticated()"
+>
+  <div class="card-block">
+    <textarea
+      class="form-control"
+      placeholder="Write a comment..."
+      rows="3"
+      formControlName="comment"
+    ></textarea>
+  </div>
+  <div class="card-footer">
+    <img src="{{ article.author.image }}" class="comment-author-img" />
+    <button class="btn btn-sm btn-primary" type="submit" [disabled]="loading">
+      Post Comment
+    </button>
+  </div>
+</form>
+
+<p *ngIf="!authServ.isAuthenticated()">
+  <a routerLink="/login">Sign in</a> or <a routerLink="/register">sign up</a> to
+  add comments on this article.
+</p>

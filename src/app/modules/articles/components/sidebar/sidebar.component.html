@@ -1,0 +1,16 @@
+<div class="sidebar">
+  <p>Popular Tags</p>
+
+  <div class="tag-list" *ngIf="!loading && tags.length !== 0">
+    <a
+      *ngFor="let tag of tags"
+      (click)="tagClickHandler(tag)"
+      class="tag-pill tag-default"
+      routerLink=""
+    >
+      {{ tag }}
+    </a>
+  </div>
+  <div *ngIf="!loading && tags.length === 0">No tags are here... yet.</div>
+  <div *ngIf="loading">Loading tags...</div>
+</div>

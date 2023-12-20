@@ -1,0 +1,11 @@
+<button
+  class="btn btn-sm btn-outline-secondary"
+  [class.disabled]="loading"
+  [class.active]="profile.following"
+  (click)="toggleFollow()"
+>
+  <i class="ion-plus-round"></i>&nbsp;
+  <span *ngIf="!profile.following">Follow</span>
+  <span *ngIf="profile.following">Unfollow</span>
+  {{ profile.username }}
+</button>
